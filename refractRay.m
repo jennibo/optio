@@ -3,7 +3,7 @@ function [ rayStart, rayDir2 ] = refractRay(hit, rayDir, p, n1, n2)
 %lines rayDir, polynomial function, p and refraction indexes, n1 and n2.
 
 %calculating the derivative of the function and using it to calculate the normal
-n = [-polyval(polyder(p), hit(:, 1)); ones(size(hit(:, 1)))]; 
+n = [-polyval(polyder(p), hit(1, :)); ones(size(hit(1, :)))]; 
 n = normc(n); 
 
 %constants to the function below
