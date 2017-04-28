@@ -3,3 +3,4 @@
 f = @(x) 2.*x;
 
 line([rayStart(1, :); rayDir(1, :)+rayStart(1, :)], [rayStart(2, :); rayDir(2, :)+rayStart(2, :)])
+intersect = intsec(f, rayDir,

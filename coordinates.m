@@ -1,5 +1,6 @@
 function [ coordinates ] = coordinates( rayStart, rayDir, f )
-%UNTITLED4 Summary of this function goes here
+% Takes a set of lines and a polynomial function
+% and calculates the intersection points between the lines and the polynomial. 
 
 % Coordinates är en 2 x n matris där varje kolonn i matrisen beskriver en
 % punkt. X-värdet i första raden. Y-värdet i andra.
@@ -8,6 +9,9 @@ coordinates = zeros(size(rayStart));
 
 for j = 1:size(rayStart,2)
     r = f(1);
+    
+    % Konstruerar ett polynom i t där den minsta positiva roten motsvarar längden strålarna
+    % går innan de träffar ytan.
     for k = 2:length(f)
         r = conv(r,[rayDir(1,j),rayStart(1,j)]);
         r(end) = r(end) + f(k);
@@ -23,6 +27,7 @@ for j = 1:size(rayStart,2)
 
     % Sätter in de nya X-koordinaterna i första raden på resultatmatrisen.
     coordinates(1, j) = rayStart(1, j) + t*rayDir(1, j);
+    % Sätter in de nya Y-koordinaterna i andra raden på resultatmatrisen.
     coordinates(2, j) = rayStart(2, j) + t*rayDir(2, j);
     %coordinates(2, j) = polyval(f, coordinates(1, j));
     
