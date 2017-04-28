@@ -16,11 +16,8 @@ end
 p = polyfit(X,Y,klick + 1);
 x = linspace(-0.9,0.9);
 y = polyval(p,x);
-f = @(x) p(4) + p(3) .* x + p(2) .* x.^2 + p(1) .* x.^3;
-G = f(x);
 hold on;
 plot(x,y);
-
 axis( [-1 1 -1 1]);
 
 
