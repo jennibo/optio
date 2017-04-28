@@ -11,7 +11,7 @@ Y(1) = 0;
 Y(end) = 0;
 for k=1:klick
 [X(k + 1), Y(k + 1)] = ginput(1);
-
+plot(X(k + 1), Y(k + 1),'o');
 end
 p = polyfit(X,Y,klick + 1);
 x = linspace(-0.9,0.9);
