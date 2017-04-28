@@ -23,7 +23,7 @@ rayDir2 = zeros(size(rayDir));
 rayDir2(refracted) = r*rayDir(refracted) + (r*c(refracted) - sqrt(1-r^2*(1-c(refracted).^2))).*n(refracted);
 
 %the direction of the reflected rays is calculated
-rayDir2(not(refracted)) = reflectRay(rayDir(not(refracted)), n(not(refracted)), c(not(refracted)));
+rayDir2(not(refracted)) = reflectRay(rayDir(not(refracted)), n(not(refracted)), -c(not(refracted)));
 rayDir2 = normc(rayDir2);
 
 %the orgin of the new rays
