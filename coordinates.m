@@ -22,7 +22,7 @@ for j = 1:size(rayStart,2)
     
     % Hittar lägsta positiva värdet för t
     allRoots = roots(r);
-    allRoots(or(allRoots<0, abs(imag(allRoots))>1e-6)) = inf;
+    allRoots(or(allRoots<=1.0e-3, abs(imag(allRoots))>1e-6)) = inf;
     t = real(min(allRoots));
 
     % Sätter in de nya X-koordinaterna i första raden på resultatmatrisen.

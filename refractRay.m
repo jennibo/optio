@@ -7,8 +7,8 @@ n = [-polyval(polyder(p), hit(1, :)); ones(size(hit(1, :)))];
 n = normc(n); 
 
 %constants to the function below
-r = repmat((1 - inside)*n1/n2 + inside*n2/n1, 2, 1);
-c = -repmat(dot(n, rayDir), 2, 1);
+r = (1 - inside)*n1/n2 + inside*n2/n1;
+c = -dot(n, rayDir);
 
 %the function that calculates the new refracted rays can be found at https://en.wikipedia.org/wiki/Snell%27s_law
 
@@ -16,14 +16,18 @@ c = -repmat(dot(n, rayDir), 2, 1);
 %for the reflected rays.
 refracted = 1 - r.^2.*(1 - c.^2) >= 0;
 
+%make the constants the same size as rayDir
+r = repmat(r, 2, 1);
+c = repmat(c, 2, 1);
+
 %there are equal rays before and after the encounter with the surface
 rayDir2 = zeros(size(rayDir));
 
 %the direction of the refracted rays is calculated
-rayDir2(refracted) = r(refracted).*rayDir(refracted) + (r(refracted).*c(refracted) - sqrt(1-r(refracted).^2.*(1-c(refracted).^2))).*n(refracted);
+rayDir2(:, refracted) = r(:, refracted).*rayDir(:, refracted) + (r(:, refracted).*c(:, refracted) - sqrt(1-r(:, refracted).^2.*(1-c(:, refracted).^2))).*n(:, refracted);
 
 %the direction of the reflected rays is calculated
-rayDir2(not(refracted)) = reflectRay(rayDir(not(refracted)), n(not(refracted)), -c(not(refracted)));
+rayDir2(:, not(refracted)) = reflectRay(rayDir(:, not(refracted)), n(:, not(refracted)), -c(:, not(refracted)));
 rayDir2 = normc(rayDir2);
 
 %the orgin of the new rays
