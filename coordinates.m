@@ -7,15 +7,17 @@ function [ coordinates ] = coordinates( rayStart, rayDir, f )
 
 coordinates = zeros(size(rayStart));
 
+% Går igenom alla strålar.
 for j = 1:size(rayStart,2)
-    r = f(1);
-    
     % Konstruerar ett polynom i t där den minsta positiva roten motsvarar längden strålarna
     % går innan de träffar ytan.
+    r = f(1);
     for k = 2:length(f)
         r = conv(r,[rayDir(1,j),rayStart(1,j)]);
         r(end) = r(end) + f(k);
     end
+    % Subtraherar polynomet med den räta linjens ekvation för den
+    % "nuvarande" strålen.
     r(end) = r(end) - rayStart(2,j);
     r(end-1) = r(end-1) - rayDir(2,j);
     %r = r - [zeros(1,length(r)-2),rayDir(2,j),rayStart(2,j)];
@@ -29,6 +31,7 @@ for j = 1:size(rayStart,2)
     coordinates(1, j) = rayStart(1, j) + t*rayDir(1, j);
     % Sätter in de nya Y-koordinaterna i andra raden på resultatmatrisen.
     coordinates(2, j) = rayStart(2, j) + t*rayDir(2, j);
+    
     %coordinates(2, j) = polyval(f, coordinates(1, j));
     
     fel = polyval(f, coordinates(1, j)) - coordinates(2, j)
