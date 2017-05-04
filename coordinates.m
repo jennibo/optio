@@ -31,9 +31,5 @@ for j = 1:size(rayStart,2)
     coordinates(1, j) = rayStart(1, j) + t*rayDir(1, j);
     % Sätter in de nya Y-koordinaterna i andra raden på resultatmatrisen.
     coordinates(2, j) = rayStart(2, j) + t*rayDir(2, j);
-    
-    %coordinates(2, j) = polyval(f, coordinates(1, j));
-    
-    fel = polyval(f, coordinates(1, j)) - coordinates(2, j)
 end
 end
