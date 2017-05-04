@@ -8,8 +8,8 @@ pf1 = graf(5);
 pf2 = graf(5);
 x1 = linspace(-0.9, 0.9);
 
-plot(x1,polyval(pf1, x1));
-plot(x1,polyval(pf2, x1));
+plot(x1,polyval(pf1, x1), 'color', 'black');
+plot(x1,polyval(pf2, x1), 'color', 'black');
 
 xStart = 0;
 yStart = 2;
@@ -37,7 +37,7 @@ while ~isempty(rayStart)
     % ...find all the rays that intersects outside the lens...
     pointsToRemove = abs(point(1,:))>0.9;
     % ...draw these...
-    line([rayStart(1, pointsToRemove); 4*rayDir(1, pointsToRemove)],[rayStart(2, pointsToRemove); 4*rayDir(2, pointsToRemove)]);
+    line([rayStart(1, pointsToRemove); 4*rayDir(1, pointsToRemove)],[rayStart(2, pointsToRemove); 4*rayDir(2, pointsToRemove)], 'color', 'red');
     % ...and remove them from further calculations...
     point(:,pointsToRemove) = [];
     rayStart(:,pointsToRemove) = [];
@@ -46,7 +46,7 @@ while ~isempty(rayStart)
     inside(:,pointsToRemove) = [];
     refract(:,pointsToRemove) = [];
     % ...draw the remaining lines to their new intersection...
-    line([rayStart(1, :); point(1, :)],[rayStart(2, :); point(2, :)]);
+    line([rayStart(1, :); point(1, :)],[rayStart(2, :); point(2, :)], 'color', 'red');
     % ...calculate the new direction for those that intersected the
     % rightmost surface...
     [rayStart(:, not(intersectedUpper)), rayDir(:, not(intersectedUpper)), refract(:, not(intersectedUpper))] = refractRay(point(:, not(intersectedUpper)), rayDir(:, not(intersectedUpper)), pf2, n1, n2, inside(:, not(intersectedUpper)));
