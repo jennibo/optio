@@ -6,6 +6,12 @@ camroll(90);
 axis([-1,1,-1,1]);
 pf1 = graf(5);
 pf2 = graf(5);
+clf
+
+hold on;
+axis equal;
+camroll(90);
+axis([-1,1,-1,1]);
 x1 = linspace(-0.9, 0.9);
 
 plot(x1,polyval(pf1, x1), 'color', 'black');
