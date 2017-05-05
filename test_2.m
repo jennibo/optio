@@ -1,12 +1,13 @@
 %% Skapa polynomen.
 clf
-pf1 = [1000 0.5];
-pf2 = [1000 -0.5];
+pf1 = [1/1.5 0 -0.3];
+pf2 = [-1/1.5 0 0.7];
+x1 = linspace(-0.9, 0.9);
 
 hold on;
 axis equal;
 camroll(90);
-axis([-1,1,-1,1]);
+axis([-1,1,-2,2]);
 hold on;
 
 plot(x1,polyval(pf1, x1), 'color', 'black');
@@ -16,7 +17,7 @@ xStart = 0;
 yStart = 2;
 
 n1 = 1;
-n2 = 1.5;
+n2 = 1.4;
 
 %% Beräkna brytningarna.
 
