@@ -1,13 +1,13 @@
 %% Skapa polynomen.
 clf
-pf1 = [1/1.5 0 -0.3];
-pf2 = [-1/1.5 0 0.7];
+pf1 = [-1/16 0 -1/8 0 -1/2 0 1/2-0.8];
+pf2 = -[-1/16 0 -1/8 0 -1/2 0 1/2+0.8];
 x1 = linspace(-0.9, 0.9);
 
 hold on;
 axis equal;
 camroll(90);
-axis([-1,1,-2,2]);
+axis([-1,1,-3,2]);
 hold on;
 
 plot(x1,polyval(pf1, x1), 'color', 'black');
@@ -22,7 +22,7 @@ n2 = 1.4;
 %% Beräkna brytningarna.
 
 % Create the rays.
-[rayStart, rayDir] = generateRays(xStart, yStart, -2*pi/5, 2*pi/5 - pi, 10);
+[rayStart, rayDir] = generateRays(xStart, yStart, -pi/2 + pi/25, -pi/2 - pi/25, 10);
 
 % In the beginning, all rays are outside.
 inside = zeros(size(rayStart(1, :)));
