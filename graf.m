@@ -1,6 +1,7 @@
 function [ p ] = graf( klick )
-%GRAF Summary of this function goes here
-%   Detailed explanation goes hereplot(0,0)
+% graf Lets the user draw one side of a lens with multiple clicks.
+%   Accepts a number of clicks as input and constructs a polynomial to fit
+%   the points where the user clicked with their mouse.
 plot(0,0);
 
 X = (1:klick + 2);
@@ -21,6 +22,4 @@ y = polyval(p,x);
 hold on;
 plot(x,y);
 axis( [-1 1 -1 1]);
-
-
 end

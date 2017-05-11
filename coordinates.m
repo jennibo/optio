@@ -1,35 +1,34 @@
 function [ coordinates ] = coordinates( rayStart, rayDir, f )
-% Takes a set of lines and a polynomial function
+% coordinates Takes a set of lines and a polynomial function
 % and calculates the intersection points between the lines and the polynomial. 
 
-% Coordinates är en 2 x n matris där varje kolonn i matrisen beskriver en
-% punkt. X-värdet i första raden. Y-värdet i andra.
+% Coordinates is a 2 x n matrix where every column in the matrix represents
+% a point. X-value in the first row, and Y-value in the second.
 
 coordinates = zeros(size(rayStart));
 
-% Går igenom alla strålar.
+% Works through all the rays.
 for j = 1:size(rayStart,2)
-    % Konstruerar ett polynom i t där den minsta positiva roten motsvarar längden strålarna
-    % går innan de träffar ytan.
+    % Constructs a polynomial of t where the smallest positive root
+    % represents the length the rays has to travel before they hit the
+    % surface of the lens.
     r = f(1);
     for k = 2:length(f)
         r = conv(r,[rayDir(1,j),rayStart(1,j)]);
         r(end) = r(end) + f(k);
     end
-    % Subtraherar polynomet med den räta linjens ekvation för den
-    % "nuvarande" strålen.
+    % Subtracts the polynomial with the line representing the current ray.
     r(end) = r(end) - rayStart(2,j);
     r(end-1) = r(end-1) - rayDir(2,j);
-    %r = r - [zeros(1,length(r)-2),rayDir(2,j),rayStart(2,j)];
     
-    % Hittar lägsta positiva värdet för t
+    % Finds the smallest positive value for t.
     allRoots = roots(r);
     allRoots(or(allRoots<=1.0e-3, abs(imag(allRoots))>1e-6)) = inf;
     t = real(min(allRoots));
-
-    % Sätter in de nya X-koordinaterna i första raden på resultatmatrisen.
+    
+    % Inserts the new X-coordinates in the first row of "coordinates".
     coordinates(1, j) = rayStart(1, j) + t*rayDir(1, j);
-    % Sätter in de nya Y-koordinaterna i andra raden på resultatmatrisen.
+    % Inserts the new Y-coordinates in the first row of "coordinates".
     coordinates(2, j) = rayStart(2, j) + t*rayDir(2, j);
 end
 end
