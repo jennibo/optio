@@ -9,6 +9,8 @@ n = normc(n);
 %constants to the function below
 r = (1 - inside)*n1/n2 + inside*n2/n1;
 c = -dot(n, rayDir);
+n(:, c<0) = -n(:, c<0);
+c = abs(c);
 
 %the function that calculates the new refracted rays can be found at https://en.wikipedia.org/wiki/Snell%27s_law
 

@@ -11,7 +11,7 @@ clf
 hold on;
 axis equal;
 camroll(90);
-axis([-1,1,-1,1]);
+axis([-1,1,-2,2]);
 x1 = linspace(-0.9, 0.9);
 
 plot(x1,polyval(pf1, x1), 'color', 'black');
@@ -43,7 +43,7 @@ while ~isempty(rayStart)
     % ...find all the rays that intersects outside the lens...
     pointsToRemove = abs(point(1,:))>0.9;
     % ...draw these...
-    line([rayStart(1, pointsToRemove); 4*rayDir(1, pointsToRemove)],[rayStart(2, pointsToRemove); 4*rayDir(2, pointsToRemove)], 'color', 'red');
+    line([rayStart(1, pointsToRemove); rayStart(1, pointsToRemove)+4*rayDir(1, pointsToRemove)],[rayStart(2, pointsToRemove); rayStart(2, pointsToRemove)+4*rayDir(2, pointsToRemove)], 'color', 'red');
     % ...and remove them from further calculations...
     point(:,pointsToRemove) = [];
     rayStart(:,pointsToRemove) = [];
